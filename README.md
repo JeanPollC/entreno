@@ -24,13 +24,13 @@ la copia de seguridad es el JSON que exporta la pestaña Historial.
 - Desde **Historial** puedes **Editar** (lo carga en Entrenar) o **Borrar** cualquier entrenamiento.
 - Cambiar la fecha o el día de rutina carga lo que ya exista guardado para esa combinación.
 
-## Publicar (GitHub Pages)
+## Publicación
 
-1. Crea un repositorio y sube estos archivos a la raíz (o a `docs/`).
-2. Settings → Pages → *Deploy from a branch* → rama `main`, carpeta `/ (root)`.
-3. La URL queda como `https://<usuario>.github.io/<repo>/`.
+- Repositorio: <https://github.com/JeanPollC/entreno>
+- App publicada (GitHub Pages, rama `main`, raíz): **<https://jeanpollc.github.io/entreno/>**
 
-Cada vez que publiques cambios, **sube el número de `CACHE` en `sw.js`** (`entreno-v2`, `v3`, …)
+Para publicar cambios basta con hacer commit y `git push`; Pages redepliega en 1–2 minutos.
+Cada vez que cambies `index.html`, **sube el número de `CACHE` en `sw.js`** (`entreno-v2`, `v3`, …)
 para que los teléfonos descarguen la versión nueva. La actualización se aplica en el siguiente
 arranque de la app.
 
