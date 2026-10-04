@@ -1,6 +1,6 @@
 /* Service worker: deja la app disponible sin conexión.
    Sube el número de CACHE cada vez que publiques cambios. */
-const CACHE='entreno-v1';
+const CACHE='entreno-v2';
 const ARCHIVOS=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./icon-maskable-512.png'];
 
 self.addEventListener('install',e=>{

@@ -1,7 +1,8 @@
 # Registro de entrenamiento (PWA)
 
-App de una sola página para apuntar series, peso y repeticiones de una rutina de 5 días
-(3 de tren superior, 2 de tren inferior) y ver el progreso por ejercicio. Funciona sin conexión
+App de una sola página para apuntar series, peso y repeticiones de una rutina Push / Pull / Legs
+y ver el progreso por ejercicio. La rutina anterior de 5 días sigue en el código (`RUTINA_ANTERIOR`)
+solo para poder ver y editar los entrenamientos antiguos del historial. Funciona sin conexión
 y se instala en el iPhone como una app más. Los datos viven en el teléfono (`localStorage`);
 la copia de seguridad es el JSON que exporta la pestaña Historial.
 

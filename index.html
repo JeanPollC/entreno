@@ -16,7 +16,7 @@
 :root{
   --base:#0C1822; --sup:#14242F; --sup2:#1B303E; --linea:#26434F;
   --texto:#E8F1F5; --mudo:#88A3B0;
-  --sup-acc:#3FC8F0; --inf-acc:#F5A623; --pr:#F0699B; --ok:#8BE28B;
+  --sup-acc:#3FC8F0; --tir-acc:#A99BFF; --inf-acc:#F5A623; --pr:#F0699B; --ok:#8BE28B;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
@@ -39,6 +39,7 @@ button{cursor:pointer}
 .chip b{font-size:14px;font-weight:640}
 .chip small{font-size:11px;color:var(--mudo)}
 .chip[data-foco="sup"].on{background:var(--sup-acc);border-color:var(--sup-acc);color:#062230}
+.chip[data-foco="tir"].on{background:var(--tir-acc);border-color:var(--tir-acc);color:#1A1440}
 .chip[data-foco="inf"].on{background:var(--inf-acc);border-color:var(--inf-acc);color:#2B1A00}
 .chip.on small{color:inherit;opacity:.75}
 
@@ -95,6 +96,7 @@ main{padding:4px 16px calc(96px + env(safe-area-inset-bottom))}
 .ses-cab{display:flex;align-items:center;gap:12px;padding:14px;width:100%;background:none;border:0;text-align:left}
 .marca{width:4px;align-self:stretch;border-radius:4px;background:var(--sup-acc)}
 .marca.inf{background:var(--inf-acc)}
+.marca.tir{background:var(--tir-acc)}
 .ses-cab h4{margin:0;font-size:15px;font-weight:600}
 .ses-cab p{margin:2px 0 0;font-size:12.5px;color:var(--mudo)}
 .ses-det{padding:0 14px 14px;font-size:13.5px;display:none}
@@ -195,12 +197,18 @@ const ILU={
  pressInclinado:()=>SU+P('30,86 72,46','e')+L(24,88,40,88,'e')+H(70,42)+P('38,80 64,54')+P('38,80 36,92')+P('64,54 68,38 60,26')+PL(58,24)+AR(86,42,86,26),
  curlInclinado:()=>SU+P('40,88 72,46','e')+H(74,42)+P('46,82 68,52')+P('46,82 44,92')+P('68,54 64,72 76,68')+DB(80,66)+CU('M92 78 Q96 60 86 54'),
  extCodosInclinado:()=>SU+P('40,88 72,46','e')+H(74,42)+P('46,82 68,52')+P('46,82 44,92')+P('68,52 72,34 62,26')+DB(60,24)+AR(88,38,88,22),
+ pressBanca:()=>SU+RE(22,66,62,6)+L(28,72,28,92,'e')+L(78,72,78,92,'e')+H(32,58)+L(39,61,72,63)+P('72,63 88,72 90,92')+P('52,61 48,50 52,38')+PL(52,35)+AR(68,54,68,36),
+ pressInclinadoManc:()=>SU+P('30,86 72,46','e')+L(24,88,40,88,'e')+H(70,42)+P('38,80 64,54')+P('38,80 36,92')+P('64,54 68,38 60,26')+DB(59,23)+AR(86,42,86,26),
+ remoMancuerna:()=>SU+RE(18,64,46,6)+L(22,70,22,92,'e')+L(60,70,60,92,'e')+H(28,40)+P('34,45 68,50')+L(38,46,36,64)+P('68,50 54,64')+P('68,50 76,72 74,92')+P('50,48 56,58 52,68')+DB(52,72)+AR(92,76,92,58),
+ facePull:()=>SU+L(104,10,104,92,'e')+PL(104,28,4)+L(100,28,76,28,'e')+H(54,22)+L(54,29,54,58)+P('54,58 48,76 46,92')+P('54,58 60,76 62,92')+P('54,34 66,36 76,28')+AR(94,44,74,44),
+ sentadilla:()=>SU+H(52,24)+PL(61,33,5)+P('60,34 42,60')+P('42,60 66,66 60,92')+P('60,34 66,40 62,34')+AR(92,72,92,52),
+ curlFemoral:()=>SU+L(14,10,14,92,'e')+PL(14,86,4)+L(18,85,68,72,'e')+H(48,20)+L(48,27,50,58)+P('48,32 32,36 16,34')+P('50,58 48,76 48,92')+P('50,58 54,76 68,70')+CU('M80 88 Q90 78 80 66'),
  pressPallof:()=>SU+L(12,10,12,92,'e')+PL(12,39,4)+L(12,41,46,46,'e')+H(64,20)+L(64,27,64,58)+P('64,58 54,78 52,92')+P('64,58 74,78 76,92')+P('64,32 55,38 46,44')+AR(34,58,22,58)
 };
 const svgEj = (id,color) => `<svg viewBox="0 0 120 100" style="color:${color}" aria-hidden="true"><defs><marker id="fl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#F0699B"/></marker></defs>${(ILU[id]||(()=>''))()}</svg>`;
 
 /* ============ rutina ============ */
-const DIAS=[
+const RUTINA_ANTERIOR=[
  {id:1,foco:'sup',nombre:'Tren superior',ejercicios:[
   {n:'Fondos en paralelas con lastre',o:'6-10',i:'fondos',c:'Codos cerca del cuerpo y pecho ligeramente adelante. Baja hasta que el hombro quede a la altura del codo.'},
   {n:'Plancha alta + apoyo de manos en banco o cajón',o:'10-10',i:'planchaAlta',c:'Manos en el banco, cuerpo en línea recta. Aprieta glúteo y abdomen; no dejes caer la cadera.'},
@@ -252,6 +260,55 @@ const DIAS=[
   {n:'Press pallof con banda',o:'12-12',i:'pressPallof',c:'De lado a la banda, pies firmes. Estira los brazos al frente sin dejar que el tronco gire.'}
  ]}
 ];
+/* Ejercicios de la rutina anterior que siguen en la nueva con otro nombre: su historial se conserva bajo el nombre nuevo. */
+const RENOMBRES={
+ 'Press militar con barra de pie':'Press militar con barra o mancuernas',
+ 'Elevaciones laterales con mancuernas':'Elevaciones laterales',
+ 'Extensión de codos en polea con barra, agarre prono':'Extensión de tríceps en polea',
+ 'Dominadas con agarre prono con lastre':'Dominadas pronas',
+ 'Remo con barra con agarre supino':'Remo con barra',
+ 'Jalón unilateral en polea en banco sentado':'Jalón en polea / jalón unilateral',
+ 'Curl de bíceps con barra, agarre supino':'Curl con barra',
+ 'Curl de bíceps con mancuernas, agarre neutro':'Curl martillo',
+ 'Peso muerto rumano con barra':'Peso muerto rumano'
+};
+RUTINA_ANTERIOR.forEach(d=>{d.ant=1;d.ejercicios.forEach(e=>{e.n=RENOMBRES[e.n]||e.n;});});
+
+/* Rutina actual: Push / Pull / Legs. s = series, o = repeticiones, x = aclaración, st = series como texto.
+   Los ids empiezan en 11 para no chocar con los días 1-5 de la rutina anterior, que siguen en el historial. */
+const DIAS=[
+ {id:11,foco:'sup',nombre:'Push',sub:'Pecho · hombro · tríceps',ejercicios:[
+  {n:'Press banca con barra',s:3,o:'6-8',i:'pressBanca',c:'Omóplatos juntos y pies firmes en el suelo. Baja la barra al pecho medio y empuja sin despegar la cadera del banco.'},
+  {n:'Press inclinado con mancuernas',s:3,o:'8-10',i:'pressInclinadoManc',c:'Banco a 30-45°, omóplatos juntos. Baja las mancuernas a la parte alta del pecho y empuja sin chocarlas arriba.'},
+  {n:'Press militar con barra o mancuernas',s:3,o:'6-10',i:'pressMilitar',c:'Abdomen firme y glúteo apretado. Empuja hacia arriba y mete la cabeza al pasar la frente.'},
+  {n:'Elevaciones laterales',s:3,o:'12-20',i:'lateralMancuernas',c:'Sube hasta la altura del hombro, meñique algo más alto. Nada de impulso con las piernas.'},
+  {n:'Press cerrado con barra',s:3,o:'8-12',i:'pressBanca',c:'Manos a la anchura de los hombros y codos pegados al cuerpo. Baja la barra a la parte baja del pecho.'},
+  {n:'Extensión de tríceps en polea',s:3,o:'10-15',i:'poleaTriceps',c:'Codos pegados al costado y fijos. Solo se mueve el antebrazo; estira del todo abajo.'}
+ ]},
+ {id:12,foco:'tir',nombre:'Pull',sub:'Espalda · bíceps',ejercicios:[
+  {n:'Dominadas pronas',s:3,o:'6-10',i:'dominadas',c:'Manos algo más anchas que los hombros. Lleva el pecho hacia la barra y baja hasta estirar del todo.'},
+  {n:'Remo con barra',s:3,o:'6-10',i:'remoBarra',c:'Tronco inclinado unos 45°, espalda plana. Lleva la barra al ombligo juntando los omóplatos.'},
+  {n:'Jalón en polea / jalón unilateral',s:3,o:'8-12',i:'jalonUnilateral',c:'Tira con el codo hacia atrás y abajo. Deja que el hombro se estire arriba en cada repetición.'},
+  {n:'Remo unilateral con mancuerna',s:3,o:'8-12',x:'por lado',i:'remoMancuerna',c:'Mano y rodilla apoyadas en el banco, espalda plana. Lleva la mancuerna a la cadera sin girar el tronco.'},
+  {n:'Face pull',s:3,st:'2-3',o:'12-20',i:'facePull',c:'Polea a la altura de la cara. Tira de la cuerda hacia la frente separando las manos, codos altos.'},
+  {n:'Curl con barra',s:3,o:'8-12',i:'curlBarra',c:'Codos quietos junto al tronco. Sube sin mover la espalda y controla la bajada.'},
+  {n:'Curl martillo',s:2,o:'10-15',i:'curlMancuernas',c:'Palmas enfrentadas todo el recorrido. Sin balanceo: el tronco queda quieto.'}
+ ]},
+ {id:13,foco:'inf',nombre:'Legs',sub:'Pierna · core',ejercicios:[
+  {n:'Sentadilla con barra',s:3,o:'6-8',i:'sentadilla',c:'Barra sobre los trapecios, pies a la anchura de los hombros. Baja hasta el paralelo con la espalda neutra y las rodillas siguiendo la punta del pie.'},
+  {n:'Peso muerto rumano',s:3,o:'8-10',i:'pesoMuerto',c:'Lleva la cadera atrás con la barra rozando el muslo. Baja hasta notar el isquio, no más.'},
+  {n:'Prensa',s:3,o:'8-12',i:'prensaUni',c:'Pies a la anchura de la cadera en la plataforma. Baja hasta 90° sin que la cadera se despegue del asiento.'},
+  {n:'Sentadilla búlgara',s:2,o:'8-12',x:'por pierna',i:'bulgara',c:'Pie trasero en el banco, peso en el talón delantero. Baja hasta que el muslo quede paralelo al suelo.'},
+  {n:'Curl femoral en polea o deslizante',s:3,o:'10-15',i:'curlFemoral',c:'En polea: tobillo enganchado, lleva el talón al glúteo sin mover la cadera. Deslizante: cadera arriba y arrastra los talones hacia ti.'},
+  {n:'Elevación de pantorrillas',s:4,o:'10-20',i:'talonPie',c:'Punta del pie en el borde. Deja bajar el talón todo lo que puedas y sube hasta arriba del todo.'},
+  {n:'Elevación de piernas / abdomen',s:3,o:'10-15',i:'piernasColgado',c:'Sube las piernas enrollando la pelvis, no solo la cadera. Baja despacio y sin balanceo.'}
+ ]}
+];
+const TODOS_DIAS=[...DIAS,...RUTINA_ANTERIOR];
+const COLOR={sup:'var(--sup-acc)',tir:'var(--tir-acc)',inf:'var(--inf-acc)'};
+const titulo=d=>d.ant?'Día '+d.id+' · '+d.nombre+' (rutina anterior)':d.nombre;
+function normalizar(lista){let c=false;lista.forEach(s=>(s.ejercicios||[]).forEach(e=>{if(RENOMBRES[e.n]){e.n=RENOMBRES[e.n];c=true;}}));return c;}
+function renombrarClaves(o){let c=false;if(o)Object.keys(o).forEach(k=>{const n=RENOMBRES[k];if(n){if(!(n in o))o[n]=o[k];delete o[k];c=true;}});return c;}
 
 /* ============ almacenamiento ============ */
 const Guarda=(()=>{
@@ -282,9 +339,9 @@ const guiasAbiertas=new Set();
 const $=s=>document.querySelector(s);
 const hoy=()=>{const d=new Date(),p=x=>String(x).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());};
 const num=v=>{const x=parseFloat(String(v).replace(',','.'));return isFinite(x)?x:null;};
-const dia=id=>DIAS.find(d=>d.id===id);
+const dia=id=>TODOS_DIAS.find(d=>d.id===id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const catalogo=n=>DIAS.flatMap(d=>d.ejercicios).find(e=>e.n===n);
+const catalogo=n=>TODOS_DIAS.flatMap(d=>d.ejercicios).find(e=>e.n===n);
 const LB=2.20462;
 const red=v=>Math.round(v*10)/10;
 const aKg=(v,u)=>u==='lb'?v/LB:v;
@@ -297,8 +354,12 @@ function avisar(t){const a=$('#aviso');a.textContent=t;a.classList.add('ver');cl
 /* ============ arranque ============ */
 (async function init(){
   sesiones=(await Guarda.leer(K_SES))||[];
+  if(normalizar(sesiones))await Guarda.escribir(K_SES,sesiones);
   unidades=(await Guarda.leer(K_UNI))||{};
-  borrador=borradorInicial(await Guarda.leer(K_BOR));
+  if(renombrarClaves(unidades))await Guarda.escribir(K_UNI,unidades);
+  const bGuardado=await Guarda.leer(K_BOR);
+  if(bGuardado)renombrarClaves(bGuardado.series);
+  borrador=borradorInicial(bGuardado);
   guardarBorrador();
   pintar();
   $('#tabs').addEventListener('click',e=>{
@@ -311,11 +372,14 @@ function irA(t){
   window.scrollTo(0,0);pintar();
 }
 
-function sugerirDia(){if(!sesiones.length)return 1;const u=sesiones[sesiones.length-1].diaId;return u>=5?1:u+1;}
-const VACIAS=()=>[{kg:'',reps:''},{kg:'',reps:''}];
+function sugerirDia(){
+  for(let i=sesiones.length-1;i>=0;i--){const k=DIAS.findIndex(d=>d.id===sesiones[i].diaId);if(k>=0)return DIAS[(k+1)%DIAS.length].id;}
+  return DIAS[0].id;
+}
+const VACIAS=e=>Array.from({length:(e&&e.s)||2},()=>({kg:'',reps:''}));
 function nuevoBorrador(diaId,fecha=hoy()){
   const b={diaId,fecha,series:{}};
-  dia(diaId).ejercicios.forEach(e=>{b.series[e.n]=VACIAS();});
+  dia(diaId).ejercicios.forEach(e=>{b.series[e.n]=VACIAS(e);});
   return b;
 }
 /* Un entrenamiento guardado se identifica por fecha + día de rutina. Si ya existe uno,
@@ -327,7 +391,7 @@ function borradorDesde(s){
   dia(s.diaId).ejercicios.forEach(e=>{
     const g=s.ejercicios.find(x=>x.n===e.n);
     const filas=g?g.series.map(x=>({kg:x.kg==null?'':String(conv(x.kg,g.u||'kg',uniDe(e.n))),reps:x.reps==null?'':String(x.reps)})):[];
-    while(filas.length<2)filas.push({kg:'',reps:''});
+    while(filas.length<(e.s||2))filas.push({kg:'',reps:''});
     b.series[e.n]=filas;
   });
   return b;
@@ -363,12 +427,12 @@ function vistaEntrenar(){
   const d=dia(borrador.diaId);
   $('#top').innerHTML=`
     <div class="top-fila">
-      <div><h1>Día ${d.id} · ${d.nombre}</h1><p class="sub" id="cuenta"></p></div>
+      <div><h1>${titulo(d)}</h1><p class="sub" id="cuenta"></p></div>
       <input class="fecha" type="date" id="fecha" value="${borrador.fecha}">
     </div>
     <div class="chips">${DIAS.map(x=>`
       <button class="chip ${x.id===d.id?'on':''}" data-foco="${x.foco}" data-dia="${x.id}">
-        <b>Día ${x.id}</b><small>${x.foco==='sup'?'Superior':'Inferior'}</small></button>`).join('')}</div>`;
+        <b>${x.nombre}</b><small>${x.sub}</small></button>`).join('')}</div>`;
 
   $('#top').onclick=e=>{
     const c=e.target.closest('.chip');if(!c)return;
@@ -381,14 +445,14 @@ function vistaEntrenar(){
     const f=e.target.value||hoy();if(f===borrador.fecha)return;
     const s=sesionDe(f,borrador.diaId);
     if(s&&s.id!==borrador.sesionId){
-      if(sucio()&&!confirm('El '+fechaCorta(f)+' ya tiene guardado el Día '+borrador.diaId+'. ¿Cargarlo? Se pierde lo que llevas sin guardar.')){e.target.value=borrador.fecha;return;}
+      if(sucio()&&!confirm('El '+fechaCorta(f)+' ya tiene guardado '+titulo(dia(borrador.diaId))+'. ¿Cargarlo? Se pierde lo que llevas sin guardar.')){e.target.value=borrador.fecha;return;}
       borrador=borradorDesde(s);
     }else borrador.fecha=f;
     guardarBorrador();vistaEntrenar();
   };
 
   $('#vista').innerHTML=d.ejercicios.map((e,i)=>tarjeta(e,i,d.foco)).join('')+
-    `<p class="nota">El peso es opcional: si el ejercicio va sin carga, apunta solo las repeticiones.</p>
+    `<p class="nota">${d.ant?'':'Básicos a 1–2 reps del fallo, 2–3 min de descanso. Aislados a 0–1 en la última serie, 60–90 s. Cuando llegues al tope de repeticiones en todas las series, sube un poco el peso.<br>'}El peso es opcional: si el ejercicio va sin carga, apunta solo las repeticiones.</p>
      <div class="barra"><button class="guardar" id="btnGuardar">${borrador.sesionId?'Actualizar entrenamiento':'Guardar entrenamiento'}</button></div>`;
 
   $('#vista').oninput=e=>{
@@ -422,14 +486,14 @@ function vistaEntrenar(){
   actualizarCuenta();
 }
 
-function pauta(e){return '2 series · '+(e.t?e.o:e.o+' reps')+(e.d?' · drop set':'');}
+function pauta(e){return (e.st||e.s||2)+' series · '+(e.t?e.o:e.o+' reps')+(e.x?' '+e.x:'')+(e.d?' · drop set':'');}
 
 function tarjeta(e,i,foco){
-  const series=borrador.series[e.n]||[{kg:'',reps:''},{kg:'',reps:''}];
+  const series=borrador.series[e.n]||VACIAS(e);
   const u=ultimaVez(e.n);
   const unidad=e.t?'seg':'reps';
   const uni=uniDe(e.n);
-  const color=foco==='inf'?'var(--inf-acc)':'var(--sup-acc)';
+  const color=COLOR[foco]||COLOR.sup;
   const abierta=guiasAbiertas.has(e.n);
   return `<article class="ej ${tieneDatos(e.n)?'hecho':''}" data-card="${esc(e.n)}">
     <div class="ej-cab">
@@ -539,8 +603,8 @@ function vistaHistorial(){
       const d=dia(s.diaId);
       const nS=s.ejercicios.reduce((t,e)=>t+e.series.length,0);
       return `<div class="ses">
-        <button class="ses-cab"><i class="marca ${d&&d.foco==='inf'?'inf':''}"></i>
-          <div style="flex:1"><h4>${fechaCorta(s.fecha)} · Día ${s.diaId}${d?' · '+d.nombre:''}</h4>
+        <button class="ses-cab"><i class="marca ${d&&d.foco!=='sup'?d.foco:''}"></i>
+          <div style="flex:1"><h4>${fechaCorta(s.fecha)} · ${d?titulo(d):'Día '+s.diaId}</h4>
           <p>${s.ejercicios.length} ejercicios · ${nS} series · ${Math.round(volumenSesion(s)).toLocaleString('es-ES')} kg</p></div></button>
         <div class="ses-det"><ul>${s.ejercicios.map(e=>`<li><b>${esc(e.n)}</b><span>${e.series.map(x=>textoSerie({kg:x.kg??'',reps:x.reps},catalogo(e.n),e.u||'kg')).join('<br>')}</span></li>`).join('')}</ul>
         <div class="ses-acc"><button class="mini" data-editar="${s.id}">Editar</button><button class="borrar" data-borrar="${s.id}">Borrar este entrenamiento</button></div></div></div>`;
@@ -601,7 +665,7 @@ function exportarJSON(){const c=bajar('entrenamientos-'+hoy()+'.json',JSON.strin
 function exportarCSV(){
   const filas=[['Fecha','Dia','Ejercicio','Serie','Peso (kg)','Reps']];
   sesiones.forEach(s=>s.ejercicios.forEach(e=>e.series.forEach((x,i)=>{
-    filas.push([s.fecha,'Día '+s.diaId,e.n,i+1,x.kg??'',x.reps??'']);})));
+    filas.push([s.fecha,dia(s.diaId)?titulo(dia(s.diaId)):'Día '+s.diaId,e.n,i+1,x.kg??'',x.reps??'']);})));
   const csv='\ufeff'+filas.map(f=>f.map(c=>'"'+String(c).replace(/"/g,'""').replace('.',',')+'"').join(';')).join('\n');
   const c=bajar('entrenamientos-'+hoy()+'.csv',csv,'text/csv');avisar(c?'Elige dónde guardar el CSV':'CSV descargado');
 }
@@ -614,6 +678,7 @@ function importar(ev){
       const nuevas=Array.isArray(datos)?datos:datos.sesiones;
       if(!Array.isArray(nuevas))throw new Error('formato');
       const ids=new Set(sesiones.map(s=>s.id));
+      normalizar(nuevas);
       nuevas.forEach(s=>{if(!ids.has(s.id))sesiones.push(s);});
       sesiones.sort((a,b)=>a.fecha===b.fecha?a.id-b.id:a.fecha.localeCompare(b.fecha));
       await Guarda.escribir(K_SES,sesiones);
